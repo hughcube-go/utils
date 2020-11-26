@@ -9,14 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup go
-        uses: actions/setup-go@v2
-
-      - name: Install dependencies
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /bin v1.33.0
-          golangci-lint --version
-
-      - name: Run Test
-        run: |
-          golint ./..
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.30
