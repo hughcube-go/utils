@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func test_Getitems() []string {
+func test_GetItems() []string {
 	items := []string{"1", "你好", "hello", ""}
 
 	return items
@@ -19,7 +19,7 @@ func test_Getitems() []string {
 func Test_MD5(t *testing.T) {
 	a := assert.New(t)
 
-	for _, v := range test_Getitems() {
+	for _, v := range test_GetItems() {
 
 		t := md5.New()
 		if n, err := t.Write([]byte(v)); err != nil || n < 0 {
@@ -34,7 +34,7 @@ func Test_MD5(t *testing.T) {
 func Test_SHA1(t *testing.T) {
 	a := assert.New(t)
 
-	for _, v := range test_Getitems() {
+	for _, v := range test_GetItems() {
 
 		t := sha1.New()
 		if n, err := t.Write([]byte(v)); err != nil || n < 0 {
@@ -49,7 +49,7 @@ func Test_SHA1(t *testing.T) {
 func Test_SHA256(t *testing.T) {
 	a := assert.New(t)
 
-	for _, v := range test_Getitems() {
+	for _, v := range test_GetItems() {
 
 		t := sha256.New()
 		if n, err := t.Write([]byte(v)); err != nil || n < 0 {
@@ -64,7 +64,7 @@ func Test_SHA256(t *testing.T) {
 func Test_SHA512(t *testing.T) {
 	a := assert.New(t)
 
-	for _, v := range test_Getitems() {
+	for _, v := range test_GetItems() {
 
 		t := sha512.New()
 		if n, err := t.Write([]byte(v)); err != nil || n < 0 {
