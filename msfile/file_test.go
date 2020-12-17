@@ -101,3 +101,10 @@ func Test_Mkdir(t *testing.T) {
 		a.False(Exists(v))
 	}
 }
+
+func Test_GetExecutableFileDir(t *testing.T) {
+	a := assert.New(t)
+
+	path := GetExecutableFileDir()
+	a.True(0 < len(path))
+}

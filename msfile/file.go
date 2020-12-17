@@ -55,3 +55,11 @@ func Mkdir(path string, perm os.FileMode) error {
 func Remove(path string) error {
 	return os.RemoveAll(path)
 }
+
+func GetExecutableFileDir() string {
+	if path, err := os.Executable(); err == nil {
+		return filepath.Dir(path)
+	}
+
+	return ""
+}
