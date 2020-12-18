@@ -2,7 +2,9 @@ package mscheck
 
 import (
 	"net/url"
+	"reflect"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -36,4 +38,46 @@ func IsEmail(val string) bool {
 func IsUrl(val string) bool {
 	_, err := url.ParseRequestURI(val)
 	return err == nil
+}
+
+func IsNumeric(val interface{}) bool {
+	t := reflect.TypeOf(val).Kind()
+
+	if t == reflect.Int || t == reflect.Int8 || t == reflect.Int16 || t == reflect.Int32 || t == reflect.Int64 {
+		return true
+	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
+		return true
+	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
+		return true
+	} else if t == reflect.Float32 || t == reflect.Float64 {
+		return true
+	} else if t == reflect.String {
+		if _, err := strconv.ParseFloat(val.(string), 64); err == nil {
+			return true
+		}
+	}
+
+	return false
+}
+
+func IsDigit(val interface{}) bool {
+	t := reflect.TypeOf(val).Kind()
+
+	if t == reflect.Int || t == reflect.Int8 || t == reflect.Int16 || t == reflect.Int32 || t == reflect.Int64 {
+		return true
+	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
+		return true
+	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
+		return true
+	} else if IsNumeric(val) && t == reflect.String {
+		if _, err := strconv.ParseInt(val.(string), 10, 64); err == nil {
+			return true
+		}
+
+		if _, err := strconv.ParseUint(val.(string), 10, 64); err == nil {
+			return true
+		}
+	}
+
+	return false
 }

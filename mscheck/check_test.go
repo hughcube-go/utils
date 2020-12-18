@@ -39,3 +39,35 @@ func Test_IsUrl(t *testing.T) {
 	a.True(IsUrl("http://192.168.1.10"))
 	a.False(IsUrl("192"))
 }
+
+func Test_IsNumeric(t *testing.T) {
+	a := assert.New(t)
+
+	a.False(IsNumeric("AAA"))
+	a.False(IsNumeric("192.168.1.10"))
+	a.False(IsNumeric([]interface{}{}))
+	a.False(IsNumeric(false))
+
+	a.True(IsNumeric("11111111111111111111111111111"))
+	a.True(IsNumeric("11111111111111111111111111111.11111111111111111111111111111"))
+	a.True(IsNumeric(0.11111111111111111111111111111))
+	a.True(IsNumeric(int64(11111111111111111)))
+	a.True(IsNumeric(1))
+}
+
+func Test_IsDigit(t *testing.T) {
+	a := assert.New(t)
+
+	a.False(IsDigit("AAA"))
+	a.False(IsDigit("192.168.1.10"))
+	a.False(IsDigit([]interface{}{}))
+	a.False(IsDigit(false))
+
+	a.False(IsDigit("11111111111111111111111111111.11111111111111111111111111111"))
+	a.False(IsDigit(0.11111111111111111111111111111))
+
+	a.True(IsDigit("11111111111111111"))
+	a.True(IsDigit(int64(11111111111111111)))
+	a.True(IsDigit(-1))
+	a.True(IsDigit("-1"))
+}
