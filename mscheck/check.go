@@ -47,8 +47,6 @@ func IsNumeric(val interface{}) bool {
 		return true
 	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
 		return true
-	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
-		return true
 	} else if t == reflect.Float32 || t == reflect.Float64 {
 		return true
 	} else if t == reflect.String {
@@ -67,9 +65,7 @@ func IsDigit(val interface{}) bool {
 		return true
 	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
 		return true
-	} else if t == reflect.Uint || t == reflect.Uint8 || t == reflect.Uint16 || t == reflect.Uint32 || t == reflect.Uint64 {
-		return true
-	} else if IsNumeric(val) && t == reflect.String {
+	} else if t == reflect.String {
 		if _, err := strconv.ParseInt(val.(string), 10, 64); err == nil {
 			return true
 		}
