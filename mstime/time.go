@@ -1,4 +1,4 @@
-package msdate
+package mstime
 
 import "time"
 

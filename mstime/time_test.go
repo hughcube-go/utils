@@ -1,4 +1,4 @@
-package msdate
+package mstime
 
 import (
 	"github.com/stretchr/testify/assert"
