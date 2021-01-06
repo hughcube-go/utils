@@ -52,18 +52,14 @@ func GetElemType(list interface{}, withPtr bool) (reflect.Type, error) {
 
 func MakeSameTypeValue(list interface{}, len int, cap int) (reflect.Value, error) {
 	listType := reflect.TypeOf(list)
-	listValue := reflect.ValueOf(list)
 
 	if listType.Kind() == reflect.Ptr {
 		listType = listType.Elem()
-		listValue = listValue.Elem()
 	}
 
 	if listType.Kind() != reflect.Slice {
-		return listValue, errors.New("List must be of type Slice")
+		return reflect.Value{}, errors.New("List must be of type Slice")
 	}
 
-	slice := reflect.MakeSlice(listType, len, cap)
-
-	return slice, nil
+	return reflect.MakeSlice(listType, len, cap), nil
 }
