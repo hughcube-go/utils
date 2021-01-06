@@ -30,7 +30,7 @@ func In(item interface{}, items ...interface{}) bool {
 	return InArray(item, items)
 }
 
-func GetSliceElemType(list interface{}, skipPtr bool) (reflect.Type, error) {
+func GetElemType(list interface{}, skipPtr bool) (reflect.Type, error) {
 	listType := reflect.TypeOf(list)
 
 	if listType.Kind() == reflect.Ptr {
@@ -50,7 +50,7 @@ func GetSliceElemType(list interface{}, skipPtr bool) (reflect.Type, error) {
 	return rowType, nil
 }
 
-func MakeSameTypeSliceValue(list interface{}, len int, cap int) (reflect.Value, error) {
+func MakeSameTypeValue(list interface{}, len int, cap int) (reflect.Value, error) {
 	listType := reflect.TypeOf(list)
 	listValue := reflect.ValueOf(list)
 

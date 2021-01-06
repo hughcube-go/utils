@@ -52,56 +52,56 @@ func Test_Slice_In(t *testing.T) {
 	a.False(In([]int{1, 2, 4}, 1))
 }
 
-func Test_Slice_GetSliceElemType(t *testing.T) {
+func Test_Slice_GetElemType(t *testing.T) {
 	var err error
 	var typ reflect.Type
 
 	a := assert.New(t)
 
 	emptyInterfaceSlice := []interface{}{}
-	typ, err = GetSliceElemType(emptyInterfaceSlice, false)
+	typ, err = GetElemType(emptyInterfaceSlice, false)
 	a.Nil(err)
 	a.True(typ.Kind() == reflect.Interface)
 
 	interfaceSlice := []interface{}{1}
-	typ, err = GetSliceElemType(interfaceSlice, false)
+	typ, err = GetElemType(interfaceSlice, false)
 	a.Nil(err)
 	a.True(typ.Kind() == reflect.Interface)
 
 	intSlice := []int{1}
-	typ, err = GetSliceElemType(intSlice, false)
+	typ, err = GetElemType(intSlice, false)
 	a.Nil(err)
 	a.True(typ.Kind() == reflect.Int)
 
 	ptrIntSlice := []*int{}
-	typ, err = GetSliceElemType(ptrIntSlice, false)
+	typ, err = GetElemType(ptrIntSlice, false)
 	a.Nil(err)
 	a.True(typ.Kind() == reflect.Ptr)
 
-	typ, err = GetSliceElemType(ptrIntSlice, true)
+	typ, err = GetElemType(ptrIntSlice, true)
 	a.Nil(err)
 	a.True(typ.Kind() == reflect.Int)
 
-	typ, err = GetSliceElemType(1, true)
+	typ, err = GetElemType(1, true)
 	a.NotNil(err)
 }
 
-func Test_Slice_MakeSameTypeSliceValue(t *testing.T) {
+func Test_Slice_MakeSameTypeValue(t *testing.T) {
 	a := assert.New(t)
 
 	var newSliceValue reflect.Value
 	var err error
 
 	intSlice := []int{1}
-	newSliceValue, err = MakeSameTypeSliceValue(intSlice, 0, 0)
+	newSliceValue, err = MakeSameTypeValue(intSlice, 0, 0)
 	a.Nil(err)
 	a.IsType(intSlice, newSliceValue.Interface())
 
 	structSlice := []struct{}{}
-	newSliceValue, err = MakeSameTypeSliceValue(structSlice, 0, 0)
+	newSliceValue, err = MakeSameTypeValue(structSlice, 0, 0)
 	a.Nil(err)
 	a.IsType(structSlice, newSliceValue.Interface())
 
-	_, err = MakeSameTypeSliceValue(1, 0, 0)
+	_, err = MakeSameTypeValue(1, 0, 0)
 	a.NotNil(err)
 }
