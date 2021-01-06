@@ -30,7 +30,7 @@ func In(item interface{}, items ...interface{}) bool {
 	return InArray(item, items)
 }
 
-func GetElemType(list interface{}, skipPtr bool) (reflect.Type, error) {
+func GetElemType(list interface{}, withPtr bool) (reflect.Type, error) {
 	listType := reflect.TypeOf(list)
 
 	if listType.Kind() == reflect.Ptr {
@@ -43,7 +43,7 @@ func GetElemType(list interface{}, skipPtr bool) (reflect.Type, error) {
 
 	rowType := listType.Elem()
 
-	if skipPtr && rowType.Kind() == reflect.Ptr {
+	if withPtr && rowType.Kind() == reflect.Ptr {
 		rowType = rowType.Elem()
 	}
 
