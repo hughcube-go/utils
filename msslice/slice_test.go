@@ -82,7 +82,7 @@ func Test_Slice_GetElemType(t *testing.T) {
 	a.Nil(err)
 	a.True(typ.Kind() == reflect.Int)
 
-	typ, err = GetElemType(1, true)
+	_, err = GetElemType(1, true)
 	a.NotNil(err)
 }
 
