@@ -28,3 +28,21 @@ func ClientIP(r *http.Request) string {
 
 	return ""
 }
+
+func IsSecureConnection(request *http.Request) bool {
+	headers := map[string][]string{}
+	headers["X-Forwarded-Proto"] = []string{"https"} // Common
+	headers["Front-End-Https"] = []string{"on"}      // Microsoft
+
+	for name, values := range headers {
+		for _, requestValue := range request.Header.Values(name) {
+			for _, value := range values {
+				if strings.ToUpper(value) == strings.ToUpper(requestValue) {
+					return true
+				}
+			}
+		}
+	}
+
+	return false
+}
