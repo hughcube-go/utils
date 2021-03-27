@@ -37,7 +37,7 @@ func IsSecureConnection(request *http.Request) bool {
 	for name, values := range headers {
 		for _, requestValue := range request.Header.Values(name) {
 			for _, value := range values {
-				if strings.ToUpper(value) == strings.ToUpper(requestValue) {
+				if strings.EqualFold(value, requestValue) {
 					return true
 				}
 			}
